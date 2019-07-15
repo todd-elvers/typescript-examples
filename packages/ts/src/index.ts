@@ -22,7 +22,7 @@ console.log(personGreeter(bill));
 // Extending the above example with OOP practices
 //
 class Student implements Person {
-  fullName: string;
+  public fullName: string;
 
   constructor(
     public firstName: string,

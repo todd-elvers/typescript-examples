@@ -37,6 +37,8 @@
     "typescript-tooling": "^4.1.0"
   },
   "dependencies": {
+    "@grapheng/prelude": "^5.0.0",
+    "fp-ts": "^2.0.2",
     "moment": "^2.24.0"
   }
 }
