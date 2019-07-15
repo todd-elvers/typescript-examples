@@ -1,13 +1,18 @@
+# Project related
 dist
 node_modules
-
-.tst
-.vscode
 .cache
-.DS_Store
-.idea
+.tst
+*.log
 
+# IDE related
+.vscode
+.idea
 *.iml
 *.ipr
 *.iws
-*.log
+
+# OS related
+.DS_Store
+~$*
+*~
