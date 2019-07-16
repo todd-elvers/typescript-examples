@@ -1,4 +1,4 @@
-import { Array } from "@grapheng/prelude";
+import { Array, Semigroup } from "@grapheng/prelude";
 import { contramap, getStructEq } from "fp-ts/lib/Eq";
 
 console.log("Welcome to functional programming.");
@@ -98,3 +98,23 @@ const ordNumber: Ord<number> = {
 const min = <T>(O: Ord<T>) => (x: T, y: T) => (O.compare(x, y) === 1 ? y : x);
 
 min(ordNumber)(2, 1); // 1
+
+///////////////////////////
+// Semigroup<T> examples //
+///////////////////////////
+
+/** `semigroupAll` is the boolean semigroup under conjunction */
+const semigroupPredicate: Semigroup.Semigroup<
+  (p: Point) => boolean
+> = Semigroup.getFunctionSemigroup(Semigroup.semigroupAll)<Point>();
+
+const isPositiveX = (p: Point): boolean => p.x >= 0;
+const isPositiveY = (p: Point): boolean => p.y >= 0;
+
+const isPositiveXY = semigroupPredicate.concat(isPositiveX, isPositiveY);
+
+console.log("0 and 0 are both >= 0? " + isPositiveXY({ x: 0, y: 0 }));          // true
+console.log("1 and 1 are both >= 0? " + isPositiveXY({ x: 1, y: 1 }));          // true
+console.log("0 and -1 are both >= 0? " + isPositiveXY({ x: 1, y: -1 }));        // false
+console.log("-1 and 1 are both >= 0? " + isPositiveXY({ x: -1, y: 1 }));        // false
+console.log("-1 and -1 are both >= 0? " + isPositiveXY({ x: -1, y: -1 }));      // false
